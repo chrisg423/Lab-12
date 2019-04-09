@@ -24,6 +24,7 @@ struct Employee {
 
 void print (const vector <Employee> allEmployees);
 void lastNameSort (vector <Employee> &allEmployees);
+int totalPayroll (const vector <Employee> allEmployees);
 
 int main(int argc, char *argv[]) {
     string inFileText;
@@ -51,15 +52,17 @@ int main(int argc, char *argv[]) {
     }
     print(allEmployees);
 
+    int total = totalPayroll(allEmployees);
+    cout << "Total Payroll: " << "$" << std::setprecision(2) << total << endl;
+
     inStream.close(); // close the file
 }
 
 void print (const vector <Employee> allEmployees) { // print function
     int size = allEmployees.size(); // size to use for vector
     cout << endl << "Sorted by last name." << endl;
-    cout << endl;
     cout << "ID:" << "\t\t" << "Name:" << "\t\t\t" << "Salary:" << endl;
-
+    cout << "-------------------------------------------------------------------------------" << endl;
     for (int i = 0; i < size; i++) {
         cout << allEmployees[i].ID << "\t\t";
         cout << allEmployees[i].firstName << " ";
@@ -82,6 +85,15 @@ void lastNameSort (vector <Employee> &allEmployees) { // sort last name function
             }
         }
     }
+}
+
+int totalPayroll (const vector <Employee> allEmployees) {
+    int size = allEmployees.size(); // find size to use in loop
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum = sum + allEmployees[i].salary;
+    }
+    return sum;
 }
 
 
